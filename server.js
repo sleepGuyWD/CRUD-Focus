@@ -16,6 +16,13 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 
     app.get('/', (req, res) => {
       res.sendFile(__dirname + '/index.html')
+      const cursor = db.collection('quotes').find().toArray()
+      .then(results => {
+        console.log(results)
+      })
+      .catch(error => console.error(error))
+
+      //begin from here - "Using EJS and install"
     })
     
     app.post('/quotes', (req, res) => {
