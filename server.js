@@ -12,19 +12,17 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
     console.log('Connected to Database')
     const db = client.db('star-wars-quotes')
     const quotesCollection = db.collection('quotes')
-
     app.set('view engine', 'ejs')
-
     app.use(bodyParser.urlencoded({extended: true}))
-
     app.get('/', (req, res) => {
-      res.sendFile(__dirname + '/index.html')
-      const cursor = db.collection('quotes').find().toArray()
-      .then(results => {
-        
-      })
-      .catch(error => console.error(error))
-      res.render('index.ejs', {quotes: results})
+      quotesCollection.find().toArray()
+        .then(results => {
+          res.render('index.ejs', {quotes: results})
+        })
+        .catch(error => console.error(error))
+      
+
+      
 
       //begin from here - "Using EJS and install"
     })
