@@ -14,6 +14,9 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
     const quotesCollection = db.collection('quotes')
     app.set('view engine', 'ejs')
     app.use(bodyParser.urlencoded({extended: true}))
+    app.use(express.static('public'))
+    app.use(bodyParser.json())
+
     app.get('/', (req, res) => {
       quotesCollection.find().toArray()
         .then(results => {
@@ -31,6 +34,38 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
       quotesCollection.insertOne(req.body)
       .then(result => {
         res.redirect('/')
+      })
+      .catch(error => console.error(error))
+    })
+
+    app.put('/quotes', (req, res) => {
+      quotesCollection.findOneAndUpdate(
+        {name: 'Yoda'},
+        {
+          $set: {
+            name: req.body.name,
+            quote: req.body.quote
+          }
+        },
+        {
+          upsert: true
+        }
+      )
+      .then(result => {
+        res.json('Success')
+      })
+      .catch(error => console.error(error))
+    })
+
+    app.delete('/quotes', (req, res) => {
+      quotesCollection.deleteOne(
+        {name : req.body.name},
+      )
+      .then(result => {
+        if (result.deletedCount === 0) {
+          return res.json('No Quote to delete')
+        }
+        res.json(`Deleted Darth Vader's quote`)
       })
       .catch(error => console.error(error))
     })
