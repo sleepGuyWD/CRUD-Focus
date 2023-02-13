@@ -6,6 +6,7 @@ const { localsName } = require('ejs')
 const app = express()
 const MongoClient = require('mongodb').MongoClient
 const connectionString = 'mongodb+srv://sleepGuy:wdCRUD@cluster0.jdbzmzw.mongodb.net/?retryWrites=true&w=majority'
+const path = require('path')
 
 MongoClient.connect(connectionString, { useUnifiedTopology: true })
   .then(client => {
@@ -16,6 +17,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
     app.use(bodyParser.urlencoded({extended: true}))
     app.use(express.static('public'))
     app.use(bodyParser.json())
+    app.use(express.static(path.join(__dirname, 'public')))
 
     app.get('/', (req, res) => {
       quotesCollection.find().toArray()
@@ -23,11 +25,6 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
           res.render('index.ejs', {quotes: results})
         })
         .catch(error => console.error(error))
-      
-
-      
-
-      //begin from here - "Using EJS and install"
     })
     
     app.post('/quotes', (req, res) => {

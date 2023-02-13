@@ -1,44 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="autumn">
 <head>
   <meta charset="UTF-8">
-
   <title>MY APP</title>
+  <link rel="stylesheet" href="/styles.css">
 </head>
-<body>
-  <h1> May Node and Express be with you.</h1>
-  <form action="/quotes" method="POST">
-    <input type="text" placeholder="name" name="name">
-    <input type="text" placeholder="quote" name="quote">
-    <button type="submit">Submit</button>
-  </form>
-  <h2>Quotes</h2>
-  <ul class="quotes">
-    <% for(var i = 0; i < quotes.length; i++) {%>
-      <li class="quote">
-        <!-- Output name from the iterated quote object -->
-        <span><%= quotes[i].name %></span>:
-        <!-- Output quote from the iterated quote object -->
-        <span><%= quotes[i].quote %></span>
-      </li>
-    <% } %>
-  </ul>
-  <div>
-    <h2>Darth Vader invades!</h2>
-    <p>
-      Replace first Yoda's quote with a quote written by Darth Vader
-    </p>
-    <button id="update-button">Replace Yoda's quote</button>
+<body class="h-full w-full">
+
+  <div class="navbar bg-base-100">
+    <a class="btn btn-ghost normal-case text-xl">Star Wars Quote CRUD!</a>
   </div>
-  <div>
-    <h2>Remove Darth Vader!</h2>
-    <p>
-      Delete one Darth Vader's quote. Does nothing if there are no more Darth
-      Vader's quote
-    </p>
-    <button id="delete-button">Delete Darth Vader's quote</button>
-  </div>
-  <div id="message"></div>
+
+
+  <section class="text-3xl w-full h-1/3 p-10 bg-black mb-10">
+    <h1 class="text-white"> May Node and Express be with you...</h1>
+  </section>
+
+  <section class="flex mb-10 mx-5 justify-center">
+
+
+    <div class="card w-1/3 bg-base-100 shadow-xl min-w-1/4">
+      <div class="card-body">
+
+        <h2 class="card-title">Add Quote!</h2>
+        <form action="/quotes" method="POST" class="flex flex-col ">
+          <div class=" mb-12">
+            <label class="input-group mb-0 md:mb-5">
+              <span>Name</span>
+              <input type="text" placeholder="" name="name" class="input input-bordered input-xs">
+            </label>
+            <label class="input-group">
+              <span>Quote</span>
+              <input type="text" placeholder="" name="quote" class="input input-bordered input-xs">
+            </label>
+          </div>
+          <button type="submit" class="btn w-full">Submit</button>
+        </form>
+
+      </div>
+    </div>
+
+   <div class="card w-1/3 bg-base-100 shadow-xl mx-10 min-w-1/4">
+      <div class="card-body">
+        
+        <h2 class="card-title">Darth Vader Invades!</h2>
+        <p class="mb-5">
+          Replace first Yoda's quote with a quote written by Darth Vader.
+        </p>
+        <button id="update-button" class="btn">Replace Yoda's quote</button>
+
+      </div>
+    </div>
+
+
+    <div class="card w-1/3 bg-base-100 shadow-xl min-w-1/4">
+      <div class="card-body">
+        
+        <h2 class="card-title">Remove Darth Vader</h2>
+        <p class="mb-5">
+          Delete one Darth Vader's quote. Does nothing if there are no more Darth
+          Vader's quote.
+        </p>
+        <button id="delete-button" class="btn">Delete Darth Vader's quote</button>
+        <div id="message"></div>
+
+      </div>
+    </div>
+
+
+  </section>
+
+  <section class="mx-5">
+    <div class="card w-full bg-base-100 shadow-xl ">
+      <div class="card-body">
+        
+        <h2 class="card-title">Quotes</h2>
+        <ul class="quotes ">
+          <% for(var i = 0; i < quotes.length; i++) {%>
+            <li class="quote">
+              <!-- Output name from the iterated quote object -->
+              <span><%= quotes[i].name %></span>:
+              <!-- Output quote from the iterated quote object -->
+              <span><%= quotes[i].quote %></span>
+            </li>
+          <% } %>
+        </ul>
+
+      </div>
+    </div>
+  </section>
+
   <script src="/main.js"></script>
 </body>
 </html>
