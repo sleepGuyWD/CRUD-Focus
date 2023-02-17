@@ -7,7 +7,7 @@ const app = express()
 const MongoClient = require('mongodb').MongoClient
 const connectionString = 'mongodb+srv://sleepGuy:wdCRUD@cluster0.jdbzmzw.mongodb.net/?retryWrites=true&w=majority'
 const path = require('path')
-const port = process.env.PORT || 5555
+const PORT = process.env.PORT || 5000
 
 MongoClient.connect(connectionString, { useUnifiedTopology: true })
   .then(client => {
@@ -68,8 +68,8 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
       .catch(error => console.error(error))
     })
 
-    app.listen(port, function() {
-      console.log(`Listening on ${port}`)
+    app.listen(PORT, () => {
+      console.log(`Server running on ${PORT}`)
     })
   })
   .catch(error => console.error(error))
