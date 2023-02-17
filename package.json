@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "nodemon server.js",
     "tailwind": "tailwindcss -i ./src/styles.css -o ./public/styles.css --watch",
+    
     "start": "node server.js"
   },
   "author": "",
