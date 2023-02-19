@@ -1,6 +1,9 @@
 const update = document.querySelector('#update-button')
 const deleteButton = document.querySelector('#delete-button')
 const messageDiv = document.querySelector('#message')
+let vaderPic = document.createElement("img")
+vaderPic.src = '../img/vaderImg.jpg'
+
 
 update.addEventListener('click', _=> {
   fetch('/quotes', {
@@ -39,3 +42,10 @@ deleteButton.addEventListener('click', _ => {
     }
   })
 })
+
+update.addEventListener('click', addVader)
+
+function addVader() {
+  document.querySelector('#imgContainer').appendChild(vaderPic)
+  document.querySelector('#imgHeader').innerText = "Darth Vader breathes"
+}
