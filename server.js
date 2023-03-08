@@ -55,6 +55,25 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
       .catch(error => console.error(error))
     })
 
+    app.put('/quotes', (req, res) => {
+      quotesCollection.findOneAndUpdate(
+        {name: 'Warren'},
+        {
+          $set: {
+            name: req.body.name,
+            quote: req.body.quote
+          }
+        },
+        {
+          upsert: true
+        }
+      )
+      .then(result => {
+        res.json('Success')
+      })
+      .catch(error => console.error(error))
+    })
+
     app.delete('/quotes', (req, res) => {
       quotesCollection.deleteOne(
         {name : req.body.name},
